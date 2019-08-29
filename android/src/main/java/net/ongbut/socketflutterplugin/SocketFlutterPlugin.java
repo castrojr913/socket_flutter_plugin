@@ -15,7 +15,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
-
+import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -88,9 +88,10 @@ public class SocketFlutterPlugin implements MethodCallHandler {
   private Emitter.Listener onNewMessage = new Emitter.Listener() {
     @Override
     public void call(final Object... args) {
-        String data = (String)args[0];
+        Gson gson = new Gson();
+        String data = gson.toJson(args[0]);
         Log.d("SocketIO ", "Received " + data);
-        Map<String, String> myMap= new HashMap<String, String>();
+        Map<String, String> myMap= new HashMap<>();
         myMap.put("message", data);
         channel.invokeMethod("received", myMap);
     }
