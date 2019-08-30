@@ -61,16 +61,18 @@ public class SocketFlutterPlugin implements MethodCallHandler {
         } else if (call.method.equals("emit")){
             String message = call.argument("message");
             String topic = call.argument("topic");
-            Log.d("SocketIO  ","Pushing " +  message + " on topic " + topic);
             JSONObject jb = null;
             try {
                 jb = new JSONObject(message);
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e("SocketIO", e.toString());
             }
-            if(jb != null){
+            if (jb != null){
+                Log.d("SocketIO  ","Pushing " +  message + " on topic " + topic);
                 mSocket.emit(topic,jb);
                 result.success("sent");
+            } else {
+                result.error("sent", "jb (JSONObject is null)", null);
             }
 
         } else if (call.method.equals("on")){
