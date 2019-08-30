@@ -68,7 +68,7 @@ public class SocketFlutterPlugin implements MethodCallHandler {
                 Log.e("SocketIO", e.toString());
             }
             if (jb != null){
-                Log.d("SocketIO  ","Pushing " +  message + " on topic " + topic);
+                Log.d("SocketIO  ","Pushing " +  message + " __Topic__ " + topic);
                 mSocket.emit(topic,jb);
                 result.success("sent");
             } else {
