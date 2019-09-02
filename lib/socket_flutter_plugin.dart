@@ -21,6 +21,9 @@ class SocketFlutterPlugin {
     final String socket = await _channel.invokeMethod('connect');
   }
 
+  Future<Null> disconnect() async {
+    final String socket = await _channel.invokeMethod('disconnect');
+  }
 
   Future<String> on(String topic, Function _handle) async {
     final String socket = await _channel.invokeMethod('on', <String, dynamic>{'topic': topic});

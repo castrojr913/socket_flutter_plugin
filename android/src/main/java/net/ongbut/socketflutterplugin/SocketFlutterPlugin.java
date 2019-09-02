@@ -52,12 +52,14 @@ public class SocketFlutterPlugin implements MethodCallHandler {
                 }
             }
             result.success("created");
-
-
         } else if (call.method.equals("connect")){
             mSocket.connect();
             Log.d("SocketIO  ","Connected");
             result.success("connected");
+        } else if (call.method.equals("disconnect")){
+            mSocket.disconnect();
+            Log.d("SocketIO  ","Disconnected");
+            result.success("disconnected");
         } else if (call.method.equals("emit")){
             String message = call.argument("message");
             String topic = call.argument("topic");
